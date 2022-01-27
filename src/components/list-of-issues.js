@@ -2,28 +2,12 @@ import { useEffect } from 'react';
 import { Card, CardContent, Typography, Container, IconButton } from '@mui/material';
 import Chip from '@mui/material/Chip';
 // import { Link } from 'react-router-dom';
-import { useStyles } from './../style';
+import { useStyles } from '../style';
 
-export const ListOfIssues = ({ issues, plans, setPlans, setEditPlan }) => {
+export const ListOfIssues = ({ issues }) => {
   const classes = useStyles();
   console.log(issues)
-
-  const deleteNode = (id) => {
-    setPlans(plans.filter((plan) => plan.id !== id));
-  }
-
-  const editPlan = (id) => {
-    for (let plan of plans) {
-      if (plan.id === id) {
-        setEditPlan(plan);
-      }
-    }
-  }
-
-  //   useEffect(() => {
-  //     localStorage.setItem('plans', JSON.stringify(plans));
-  //   }, [plans]);
-
+  
   return (
     <div style={{ marginTop: "3em" }}>
       {issues.message != "Not Found" ? issues.map((issue, index) => {

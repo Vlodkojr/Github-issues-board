@@ -5,7 +5,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useStyles } from './style';
-import { ListOfIssues } from './components/listOfIssues';
+import { ListOfIssues } from './components/list-of-issues';
+import { HeaderInput } from './components/header-input';
+import { FilterNavBar} from './components/filter-nav-bar';
 
 function App() {
   const [issues, setIssues] = useState(null);
@@ -13,6 +15,7 @@ function App() {
   const [repo, setRepo] = useState('');
   const [showIssues, setShowIssues] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
+  const [sorting, setSorting] = useState(null);
   const classes = useStyles();
 
   const api = `https://api.github.com/repos/${owner}/${repo}/issues`;
@@ -42,54 +45,25 @@ function App() {
     }
   }, [api, showIssues, owner, repo]);
 
-  const handleChangeOwner = (event) => {
-    setOwner(event.target.value);
-    if (showIssues) {
-      setShowIssues(false);
-    }
-  };
-
-  const handleChangeRepo = (event) => {
-    setRepo(event.target.value);
-    if (showIssues) {
-      setShowIssues(false);
-    }
-  };
-
   return (
     <BrowserRouter>
       <div className={classes.general}>
         <main className={classes.wrapper}>
-          <h1 className={classes.label}>Github issues board</h1>
-          <div className={classes.input}>
-            <div className={classes.formControl}>
-              <TextField
-                id="Owner"
-                label="Owner"
-                value={owner}
-                variant="outlined"
-                onChange={handleChangeOwner}
-              />
-            </div>
-            <TextField
-              id="Repository name"
-              label="Repository name"
-              value={repo}
-              variant="outlined"
-              onChange={handleChangeRepo}
-            />
-          </div>
-          <div className={classes.btn}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => { setShowIssues(true) }}
-              disabled={!selectAll}
-            >
-              Show issues
-            </Button>
-          </div>
-          {showIssues && issues ? <ListOfIssues issues={issues} /> : null}
+          <HeaderInput
+            owner={owner}
+            setOwner={setOwner}
+            repo={repo}
+            setRepo={setRepo}
+            showIssues={showIssues}
+            setShowIssues={setShowIssues}
+            selectAll={selectAll} />
+          {/* <FilterNavBar issues={issues}/> */}
+          {showIssues && issues ? (
+            <>
+            <FilterNavBar issues={issues} setSorting={setSorting} />
+            <ListOfIssues issues={sorting ? sorting : issues} />
+            </>
+          ) : null}
         </main>
         <footer id='footer' className={classes.footer}>
           <p className={classes.footerParagraph}>© 2022 Created by Volodymyr Romanovskyi Email: volodymyrrom1@gmail.com</p>
