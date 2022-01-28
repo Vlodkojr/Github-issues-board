@@ -4,6 +4,10 @@ export const useStyles = makeStyles(() => ({
   formControl: {
     marginRight: '2em'
   },
+  filter: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   input: {
     display: 'flex',
     justifyContent: 'center',
@@ -31,7 +35,7 @@ export const useStyles = makeStyles(() => ({
     display: "flex",
     justifyContent: "center",
     margin: "2em"
-  }, 
+  },
   btn: {
     display: 'flex',
     justifyContent: 'center',
@@ -69,14 +73,7 @@ export const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     position: 'relative',
-    backgroundImage: 'url(https://images.unsplash.com/photo-1533628635777-112b2239b1c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)',
-    '@media (max-width: 1100px)': {
-      backgroundImage: 'url(https://images.unsplash.com/photo-1533628635777-112b2239b1c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    },
-    '@media (max-width: 700px)': {
-      backgroundImage: 'url(https://images.unsplash.com/photo-1533628635777-112b2239b1c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)',
-      opacity: '0.2',
-    },
+    backgroundImage: 'url(https://images.unsplash.com/photo-1533628635777-112b2239b1c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)',    
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
@@ -93,6 +90,6 @@ export const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around'    
-  }, 
+    justifyContent: 'space-around'
+  },
 }));

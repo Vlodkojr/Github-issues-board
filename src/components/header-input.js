@@ -2,7 +2,7 @@ import { useStyles } from './../style';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-export const HeaderInput = ({ owner, setOwner, repo, setRepo, showIssues, setShowIssues, selectAll }) => {  
+export const HeaderInput = ({ owner, setOwner, repo, setRepo, showIssues, setShowIssues, selectAll }) => {
   const classes = useStyles();
 
   const handleChangeOwner = (event) => {

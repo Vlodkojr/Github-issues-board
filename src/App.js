@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useStyles } from './style';
 import { ListOfIssues } from './components/list-of-issues';
 import { HeaderInput } from './components/header-input';
-import { FilterNavBar} from './components/filter-nav-bar';
+import { FilterNavBar } from './components/filters/filter-nav-bar';
+import { MoreDetails } from './components/more-details';
 
 function App() {
   const [issues, setIssues] = useState(null);
@@ -16,6 +13,7 @@ function App() {
   const [showIssues, setShowIssues] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [sorting, setSorting] = useState(null);
+  const [details, setDetails] = useState(null);
   const classes = useStyles();
 
   const api = `https://api.github.com/repos/${owner}/${repo}/issues`;
@@ -36,11 +34,9 @@ function App() {
             return response.json();
           })
           .then(data => {
-            console.log(data);
             setIssues(data);
           })
       } catch (error) {
-        console.log('Error :', error);
       }
     }
   }, [api, showIssues, owner, repo]);
@@ -57,13 +53,15 @@ function App() {
             showIssues={showIssues}
             setShowIssues={setShowIssues}
             selectAll={selectAll} />
-          {/* <FilterNavBar issues={issues}/> */}
-          {showIssues && issues ? (
-            <>
-            <FilterNavBar issues={issues} setSorting={setSorting} />
-            <ListOfIssues issues={sorting ? sorting : issues} />
-            </>
-          ) : null}
+          <Routes>
+            <Route path="/show-more" element={<MoreDetails details={details} />} />
+            {showIssues && issues ? (
+              <Route path="/" element={<>
+                <FilterNavBar issues={issues} setSorting={setSorting} />
+                <ListOfIssues issues={sorting ? sorting : issues} setDetails={setDetails} />
+              </>} />
+            ) : null}
+          </Routes>
         </main>
         <footer id='footer' className={classes.footer}>
           <p className={classes.footerParagraph}>© 2022 Created by Volodymyr Romanovskyi Email: volodymyrrom1@gmail.com</p>
